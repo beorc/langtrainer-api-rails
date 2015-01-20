@@ -8,6 +8,7 @@ gem 'rails-api'
 
 gem 'pg'
 gem 'versionist'
+gem 'langtrainer_orm_activerecord', git: 'git@github.com:beorc/langtrainer_orm_activerecord.git', branch: 'master'
 gem 'rollbar', '~> 1.3.1'
 
 group :production do
