@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:beorc/langtrainer_orm_activerecord.git
-  revision: 00420e899f4f927644bf09230571dd2be8b0df6f
+  revision: 961d7a4ec097c990c679c2a2d7aedbba48dea55a
   branch: master
   specs:
     langtrainer_orm_activerecord (0.0.1)
@@ -28,6 +28,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    active_model_serializers (0.9.3)
+      activemodel (>= 3.2)
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -158,6 +160,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   approvals (~> 0.0.16)
   better_errors
   binding_of_caller

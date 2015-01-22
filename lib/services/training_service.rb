@@ -12,23 +12,19 @@ class TrainingService < Struct.new(:controller, :unit_advance)
     unit_advance.step_passed!
     unit_advance.advance!
 
-    next_step = unit_advance.fetch_step
-    if next_step.present?
-      controller.render_step(next_step)
-    else
-      unit_advance.revised!
-      controller.render_step(unit_advance.fetch_step)
-    end
+    controller.render_step(unit_advance.fetch_step)
   end
 
   def help_next_word
     unit_advance.word_helped!
+
     controller.render_nothing
   end
 
   def show_right_answer
     unit_advance.step_helped!
     unit_advance.step_passed!
+
     controller.render_nothing
   end
 
@@ -36,8 +32,8 @@ class TrainingService < Struct.new(:controller, :unit_advance)
     matched = false
 
     current_step = unit_advance.fetch_current_step
-    Rails.logger.info "============================================ #{current_step.inspect} \n--- #{answer.inspect}"
-    regexp = current_step.regexp(unit_advance.language.slug)
+
+    right_answers = current_step.send(unit_advance.language.slug)
 
     if regexp.present?
       matched = /#{regexp}/.match(answer)
