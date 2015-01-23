@@ -16,3 +16,5 @@ config/application.yml
 *.swp
 tags
 .approvals
+/spec/fixtures/approvals/**/*received.*
+db/*.sqlite3

@@ -1,3 +1,10 @@
 class StepSerializer < ActiveModel::Serializer
-  attributes :en, :ru, :ru_template, :ru_help, :en_template, :en_help
+  attributes(
+    :en_answers,
+    :ru_answers,
+    :ru_question,
+    :ru_help,
+    :en_question,
+    :en_help
+  )
 end

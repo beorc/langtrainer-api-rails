@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:beorc/langtrainer_orm_activerecord.git
-  revision: 961d7a4ec097c990c679c2a2d7aedbba48dea55a
+  revision: 4149ea3d6e1f4276fa9de8b860fa033402c05549
   branch: master
   specs:
     langtrainer_orm_activerecord (0.0.1)
@@ -59,6 +59,7 @@ GEM
     builder (3.2.2)
     coderay (1.1.0)
     cranky (0.3.1)
+    database_cleaner (1.4.0)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -165,6 +166,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   cranky
+  database_cleaner
   figaro
   langtrainer_orm_activerecord!
   pg

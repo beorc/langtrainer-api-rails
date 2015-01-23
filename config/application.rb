@@ -25,5 +25,7 @@ module LangtrainerApiRails
 
     config.time_zone = 'UTC'
     config.active_record.default_timezone = :utc
+
+    config.autoload_paths << Rails.root.join('lib')
   end
 end

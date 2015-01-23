@@ -1,5 +1,4 @@
 class V1::TrainingsController < V1::BaseController
-  respond_to :json
   before_action :fetch_training
 
   def verify_answer
@@ -28,21 +27,14 @@ class V1::TrainingsController < V1::BaseController
 
   def right_answer
     ActiveRecord::Base.transaction do
-      @training.push_current_step_to_next_box!
-      @training.step_revised!
       TrainingService.new(self, @training).right_answer!
     end
-
-    render json: true
   end
 
   def wrong_answer
     ActiveRecord::Base.transaction do
-      @training.push_current_step_to_first_box!
       TrainingService.new(self, @training).wrong_answer!
     end
-
-    render json: false
   end
 
   def render_step(step)
@@ -53,20 +45,24 @@ class V1::TrainingsController < V1::BaseController
     render json: nil
   end
 
+  def render_false
+    render json: false
+  end
+
   private
 
   def fetch_unit_advance
-    user = User.find_by(params[:token])
+    user = User.find_or_create_by(token: params[:token])
     unit = Unit.find(params[:unit])
     language = Language.find(params[:language])
     native_language = Language.find(params[:native_language])
 
-    @training = Training.find_by {
+    @training = Training.find_by({
       user_id: user.id,
       unit_id: unit.id,
       language_id: language.id,
       native_language_id: native_language.id
-    }
+    })
 
     fail 'Training not found!' if @training.nil?
   end

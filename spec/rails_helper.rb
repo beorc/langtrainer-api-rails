@@ -3,6 +3,13 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'approvals/rspec'
+require 'cranky'
+require 'factories/users'
+require 'factories/courses'
+require 'factories/units'
+require 'factories/steps'
+require 'factories/trainings'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -20,9 +27,17 @@ require 'rspec/rails'
 #
 # Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
+# Automigrate if needs migration
+if ActiveRecord::Migrator.needs_migration?
+  ActiveRecord::Migrator.migrate(File.join(Rails.root, 'db/migrate'))
+end
+
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
+
+DatabaseCleaner.logger = Rails.logger
+Cranky::Factory.include RSpec::ActiveModel::Mocks::Mocks
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -47,4 +62,36 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  # This says that before the entire test suite runs, clear the test database out completely.
+  # This gets rid of any garbage left over from interrupted or poorly-written tests—a
+  # common source of surprising test behavior.
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  # This part sets the default database cleaning strategy to be transactions.
+  # Transactions are very fast, and for all the tests where they do work—that is,
+  # any test where the entire test runs in the RSpec process—they are preferable.
+  config.before(:example) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  # This line only runs before examples which have been flagged :js => true.
+  # By default, these are the only tests for which Capybara fires up a test
+  # server process and drives an actual browser window via the Selenium backend.
+  # For these types of tests, transactions won’t work, so this code overrides the
+  # setting and chooses the “truncation” strategy instead.
+  config.before(:example, type: 'feature') do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before :each do
+    DatabaseCleaner.start
+  end
+
+  config.after :each do
+    DatabaseCleaner.clean
+  end
 end
