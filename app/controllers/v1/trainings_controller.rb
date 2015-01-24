@@ -3,37 +3,37 @@ class V1::TrainingsController < V1::BaseController
 
   def verify_answer
     ActiveRecord::Base.transaction do
-      TrainingService.new(self, @training).verify(params[:answer])
+      Services::Training.new(self, @training).verify(params[:answer])
     end
   end
 
   def next_step
     ActiveRecord::Base.transaction do
-      TrainingService.new(self, @training).next_step
+      Services::Training.new(self, @training).next_step
     end
   end
 
   def help_next_word
     ActiveRecord::Base.transaction do
-      TrainingService.new(self, @training).help_next_word
+      Services::Training.new(self, @training).help_next_word
     end
   end
 
   def show_right_answer
     ActiveRecord::Base.transaction do
-      TrainingService.new(self, @training).show_right_answer
+      Services::Training.new(self, @training).show_right_answer
     end
   end
 
   def right_answer
     ActiveRecord::Base.transaction do
-      TrainingService.new(self, @training).right_answer!
+      Services::Training.new(self, @training).right_answer!
     end
   end
 
   def wrong_answer
     ActiveRecord::Base.transaction do
-      TrainingService.new(self, @training).wrong_answer!
+      Services::Training.new(self, @training).wrong_answer!
     end
   end
 
@@ -51,7 +51,7 @@ class V1::TrainingsController < V1::BaseController
 
   private
 
-  def fetch_unit_advance
+  def fetch_training
     user = User.find_or_create_by(token: params[:token])
     unit = Unit.find(params[:unit])
     language = Language.find(params[:language])

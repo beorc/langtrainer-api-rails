@@ -8,7 +8,6 @@ class Cranky::Factory
     ).tap do |m|
       m.user = Factory.build(:user_stub)
       m.unit = Factory.build(:unit_stub)
-      m.send(:ensure_steps)
     end
   end
 end

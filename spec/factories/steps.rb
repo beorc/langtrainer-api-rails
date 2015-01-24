@@ -3,8 +3,8 @@ class Cranky::Factory
     stub_model(
       Step,
       id: options[:id] || n,
-      en_answers: "first #{options[:id] || n}",
-      ru_answers: "первый #{options[:id] || n}",
+      en_answers: "step #{n}",
+      ru_answers: "шаг #{n}",
       ru_question: options[:ru_question],
       ru_help: options[:ru_help],
       en_question: options[:en_question],

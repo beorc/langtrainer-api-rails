@@ -3,7 +3,13 @@ require 'rails_helper'
 describe Services::Training do
   let(:controller) { double(:controller) }
   let(:training) { Factory.build(:training_stub) }
-  let(:steps) { training.unit.steps }
+  let(:unit) { training.unit }
+
+  let(:steps) do
+    [].tap do |s|
+      3.times { s << Factory.build(:step_stub) }
+    end
+  end
 
   subject { Services::Training.new(controller, training) }
 
@@ -19,6 +25,12 @@ describe Services::Training do
     steps.each do |step|
       allow(Step).to receive(:find).with(step.id).and_return(step)
     end
+
+    allow(unit).to receive(:steps).and_return(steps)
+
+    step_ids = steps.map(&:id)
+    allow(training).to receive(:steps).and_return(step_ids)
+    training.box_0 = step_ids
   end
 
   describe '#next_step' do
@@ -27,20 +39,20 @@ describe Services::Training do
       subject.next_step
     end
 
-    context 'given the first step as current' do
+    context 'given the first step as a current' do
       it 'should render the next step' do
         expect(controller).to receive(:render_step).with(steps.second)
         subject.next_step
       end
     end
 
-    context 'given the last step as current' do
+    context 'given the last step as a current' do
       before(:each) do
         training.current_step = steps.count - 1
       end
 
-      it 'should render the first step' do
-        expect(controller).to receive(:render_step).with(steps.first)
+      it 'should render the random step form boxes' do
+        expect(controller).to receive(:render_step)
         subject.next_step
       end
     end
@@ -89,14 +101,14 @@ describe Services::Training do
     context 'given right answer' do
       it 'should call the Services::Training#right_answer!' do
         expect(subject).to receive(:right_answer!)
-        subject.verify('first 0')
+        subject.verify(steps.first.answers(:en).first)
       end
     end
 
     context 'given wrong answer' do
       it 'should call the Services::Training#wrong_answer!' do
         expect(subject).to receive(:wrong_answer!)
-        subject.verify('first 1')
+        subject.verify('step 1')
       end
     end
   end
