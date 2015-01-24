@@ -25,18 +25,6 @@ class V1::TrainingsController < V1::BaseController
     end
   end
 
-  def right_answer
-    ActiveRecord::Base.transaction do
-      Services::Training.new(self, @training).right_answer!
-    end
-  end
-
-  def wrong_answer
-    ActiveRecord::Base.transaction do
-      Services::Training.new(self, @training).wrong_answer!
-    end
-  end
-
   def render_step(step)
     render json: step
   end
