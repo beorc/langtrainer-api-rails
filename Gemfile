@@ -8,7 +8,7 @@ gem 'rails-api'
 
 gem 'pg'
 gem 'versionist'
-gem 'langtrainer_orm_activerecord', git: 'git@github.com:beorc/langtrainer_orm_activerecord.git', branch: 'master'
+gem 'langtrainer_orm_activerecord', github: 'beorc/langtrainer_orm_activerecord', branch: 'master'
 gem 'rollbar', '~> 1.3.1'
 gem 'active_model_serializers'
 
