@@ -26,7 +26,5 @@ group :test do
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'rspec-activemodel-mocks'
-  gem 'approvals', '~> 0.0.16'
   gem 'cranky'
-  gem 'database_cleaner'
 end
