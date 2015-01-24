@@ -1,16 +1,10 @@
 require 'rails_helper'
 
 describe V1::TrainingsController do
-  let(:user) { Factory.build(:user_stub) }
-  let(:unit) { Factory.build(:unit_stub) }
-  let(:training) { Factory.build(:training_stub) }
-  let(:steps) { training.unit.steps }
+  extend DataLayer::ClassMethods
+  init_data_layer
 
   before(:each) do
-    steps.each do |step|
-      allow(Step).to receive(:find).with(step.id).and_return(step)
-    end
-
     expect(User).to receive(:find_or_create_by).with({ token: user.token }).and_return(user)
     expect(Unit).to receive(:find).with(unit.id.to_s).and_return(unit)
     expect(Training).to receive(:find_by).with(

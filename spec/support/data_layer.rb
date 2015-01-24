@@ -1,7 +1,7 @@
 module DataLayer
   module ClassMethods
     def init_data_layer
-      let(:controller) { double(:controller) }
+      let(:user) { Factory.build(:user_stub) }
       let(:training) { Factory.build(:training_stub) }
       let(:unit) { training.unit }
 
@@ -19,20 +19,10 @@ module DataLayer
         allow(unit).to receive(:steps).and_return(steps)
 
         step_ids = steps.map(&:id)
-        allow(training).to receive(:steps).and_return(step_ids)
+        allow(training).to receive(:step_ids).and_return(step_ids)
         training.box_0 = step_ids
       end
     end
-  end
-
-  def wait_for_ajax
-    Timeout.timeout(Capybara.default_wait_time) do
-      loop until finished_all_ajax_requests?
-    end
-  end
-
-  def finished_all_ajax_requests?
-    page.evaluate_script('jQuery.active').zero?
   end
 end
 

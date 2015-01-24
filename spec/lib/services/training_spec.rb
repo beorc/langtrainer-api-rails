@@ -1,15 +1,10 @@
 require 'rails_helper'
 
 describe Services::Training do
-  let(:controller) { double(:controller) }
-  let(:training) { Factory.build(:training_stub) }
-  let(:unit) { training.unit }
+  extend DataLayer::ClassMethods
+  init_data_layer
 
-  let(:steps) do
-    [].tap do |s|
-      3.times { s << Factory.build(:step_stub) }
-    end
-  end
+  let(:controller) { double(:controller) }
 
   subject { Services::Training.new(controller, training) }
 
@@ -21,16 +16,6 @@ describe Services::Training do
     ].each do |method_name|
       allow(controller).to receive(method_name)
     end
-
-    steps.each do |step|
-      allow(Step).to receive(:find).with(step.id).and_return(step)
-    end
-
-    allow(unit).to receive(:steps).and_return(steps)
-
-    step_ids = steps.map(&:id)
-    allow(training).to receive(:steps).and_return(step_ids)
-    training.box_0 = step_ids
   end
 
   describe '#next_step' do
