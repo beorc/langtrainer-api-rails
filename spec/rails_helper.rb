@@ -10,6 +10,7 @@ require 'factories/units'
 require 'factories/steps'
 require 'factories/trainings'
 require 'support/data_layer'
+require 'approvals/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

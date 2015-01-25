@@ -7,7 +7,7 @@ module DataLayer
 
       let(:steps) do
         [].tap do |s|
-          3.times { s << Factory.build(:step_stub) }
+          3.times { |i| s << Factory.build(:step_stub, id: i) }
         end
       end
 

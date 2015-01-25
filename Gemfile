@@ -10,7 +10,7 @@ gem 'pg'
 gem 'versionist'
 gem 'langtrainer_orm_activerecord', github: 'beorc/langtrainer_orm_activerecord', branch: 'master'
 gem 'rollbar', '~> 1.3.1'
-gem 'active_model_serializers'
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
 
 group :production do
   gem 'puma'
@@ -27,4 +27,5 @@ group :test do
   gem 'rspec-rails'
   gem 'rspec-activemodel-mocks'
   gem 'cranky'
+  gem 'approvals', '~> 0.0.17'
 end
