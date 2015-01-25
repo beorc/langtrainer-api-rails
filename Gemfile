@@ -1,3 +1,4 @@
+ruby '2.2.0'
 source 'https://rubygems.org'
 
 
@@ -14,6 +15,7 @@ gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
 
 group :production do
   gem 'puma'
+  gem 'rails_12factor'
 end
 
 group :development do
