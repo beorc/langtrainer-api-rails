@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   api_version(:module => "V1", :path => {:value => "v1"}, :defaults => {:format => "json"}, :default => true) do
-    get 'token' => 'users#token'
-
-    resources :courses, only: :index
+    get 'world' => 'worlds#world'
 
     get 'verify_answer' => 'trainings#verify_answer'
     get 'next_step' => 'trainings#next_step'

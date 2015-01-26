@@ -1,8 +1,5 @@
 class CourseSerializer < ActiveModel::Serializer
-  attributes(
-    :id,
-    :slug
-  )
+  attributes(:slug)
 
   has_many :units
 end

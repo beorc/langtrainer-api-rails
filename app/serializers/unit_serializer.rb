@@ -1,7 +1,9 @@
 class UnitSerializer < ActiveModel::Serializer
-  attributes(
-    :id,
-    :slug,
-    :random_steps_order
-  )
+  attributes(:slug)
+
+  delegate :current_user, to: :scope
+
+  def current_step
+    current_user.trainings.for_unit(object).first.fetch_current_step
+  end
 end
