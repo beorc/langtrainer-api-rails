@@ -45,14 +45,14 @@ class V1::TrainingsController < V1::BaseController
     language = Language.find(params[:language])
     native_language = Language.find(params[:native_language])
 
-    @training = Training.find_by({
+    @training = Training.find_or_create_by({
       user_id: user.id,
       unit_id: unit.id,
       language_id: language.id,
       native_language_id: native_language.id
     })
-
-    fail 'Training not found!' if @training.nil?
+    @training.ensure_step_ids
+    @training
   end
 
   def fetch_current_user
