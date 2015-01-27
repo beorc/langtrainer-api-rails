@@ -24,7 +24,7 @@ describe V1::TrainingsController do
   end
 
   before(:each) do
-    expect(User).to receive(:find_or_create_by).with({ token: user.token }).and_return(user)
+    expect(User).to receive(:find_by).with({ token: user.token }).and_return(user)
     expect(Unit).to receive(:find).with(unit.id.to_s).and_return(unit)
     expect(Training).to receive(:find_by).with(
       user_id: user.id,

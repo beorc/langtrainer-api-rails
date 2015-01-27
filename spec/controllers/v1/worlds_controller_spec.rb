@@ -37,7 +37,6 @@ describe V1::WorldsController do
 
     it 'should render the token, published languages and published courses' do
       get :world
-      raise response.body
       verify { response.body }
     end
   end
