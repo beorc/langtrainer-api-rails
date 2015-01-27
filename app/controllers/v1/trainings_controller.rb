@@ -40,7 +40,7 @@ class V1::TrainingsController < V1::BaseController
   private
 
   def fetch_training
-    user = User.find_by(token: params[:token])
+    user = fetch_current_user
     unit = Unit.find(params[:unit])
     language = Language.find(params[:language])
     native_language = Language.find(params[:native_language])
@@ -53,5 +53,16 @@ class V1::TrainingsController < V1::BaseController
     })
 
     fail 'Training not found!' if @training.nil?
+  end
+
+  def fetch_current_user
+    user = session[:current_user]
+
+    if user.nil?
+      user = User.find_by(token: params[:token])
+      session[:current_user] = user
+    end
+
+    user
   end
 end

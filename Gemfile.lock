@@ -1,17 +1,10 @@
 GIT
   remote: git://github.com/beorc/langtrainer_orm_activerecord.git
-  revision: b8dd203dee6ce1162ac3f7debfdb252fab390ff3
+  revision: b9015b147a4e11fb8f6a44133b13978ddbf3e267
   branch: master
   specs:
     langtrainer_orm_activerecord (0.0.1)
       activerecord (~> 4.2.0)
-
-GIT
-  remote: git://github.com/rails-api/active_model_serializers.git
-  revision: 652493848addf6870776619053df0036b1e22a3b
-  specs:
-    active_model_serializers (0.10.0.pre)
-      activemodel (>= 4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -73,6 +66,9 @@ GEM
       activesupport (>= 4.1.0)
     hike (1.2.3)
     i18n (0.7.0)
+    jbuilder (2.2.6)
+      activesupport (>= 3.0.0, < 5)
+      multi_json (~> 1.2)
     json (1.8.2)
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
@@ -170,12 +166,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers!
   approvals (~> 0.0.17)
   better_errors
   binding_of_caller
   cranky
   figaro
+  jbuilder
   langtrainer_orm_activerecord!
   pg
   puma

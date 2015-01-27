@@ -11,7 +11,7 @@ gem 'pg'
 gem 'versionist'
 gem 'langtrainer_orm_activerecord', github: 'beorc/langtrainer_orm_activerecord', branch: 'master'
 gem 'rollbar', '~> 1.3.1'
-gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
+gem 'jbuilder'
 
 group :production do
   gem 'puma'
