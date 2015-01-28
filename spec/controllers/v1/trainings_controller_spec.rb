@@ -47,7 +47,7 @@ describe V1::TrainingsController do
       let(:answer) { steps.first.answers(:en).first }
 
       it 'should render next step' do
-        verify { response.body }
+        verify(format: :json) { response.body }
       end
     end
 
@@ -66,7 +66,7 @@ describe V1::TrainingsController do
     it_behaves_like 'a training'
 
     it 'should render next step' do
-      verify { response.body }
+      verify(format: :json) { response.body }
     end
   end
 
