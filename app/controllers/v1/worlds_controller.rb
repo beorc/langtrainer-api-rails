@@ -16,13 +16,6 @@ class V1::WorldsController < V1::BaseController
   end
 
   def current_user
-    user = session[:current_user]
-
-    if user.nil?
-      user = User.fetch_or_create_by!(params[:token])
-      session[:current_user] = user
-    end
-
-    user
+    @user ||= User.fetch_or_create_by!(params[:token])
   end
 end
