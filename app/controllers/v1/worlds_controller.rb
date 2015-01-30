@@ -6,6 +6,7 @@ class V1::WorldsController < V1::BaseController
       json.courses Course.published do |course|
         json.slug course.slug
         json.units course.units do |unit|
+          json.course_slug course.slug
           json.slug unit.slug
           json.current_step current_user.current_step_for(unit)
         end
