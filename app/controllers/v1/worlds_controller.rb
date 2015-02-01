@@ -6,9 +6,13 @@ class V1::WorldsController < V1::BaseController
       json.courses Course.published do |course|
         json.slug course.slug
         json.units course.units do |unit|
+          json.id unit.id
           json.course_slug course.slug
           json.slug unit.slug
-          json.current_step current_user.current_step_for(unit)
+          json.current_step do
+            json.unit_id unit.id
+            json.merge! current_user.current_step_for(unit).attributes
+          end
         end
       end
     end
