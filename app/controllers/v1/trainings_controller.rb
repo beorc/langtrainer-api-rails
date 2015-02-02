@@ -42,6 +42,7 @@ class V1::TrainingsController < V1::BaseController
   def fetch_training
     user = current_user
     unit = Unit.find(params[:unit])
+    step = Step.find(params[:step])
     language = Language.find(params[:language])
     native_language = Language.find(params[:native_language])
 
@@ -51,7 +52,11 @@ class V1::TrainingsController < V1::BaseController
       language_id: language.id,
       native_language_id: native_language.id
     })
+
     @training.ensure_step_ids
+    @training.current_step = step
+    @training.save!
+
     @training
   end
 

@@ -18,6 +18,7 @@ describe V1::TrainingsController do
     {
       token: user.token,
       unit: unit.id,
+      step: steps.first.id,
       language: Language.english.slug,
       native_language: Language.russian.slug
     }
