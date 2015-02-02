@@ -13,14 +13,15 @@ module DataLayer
 
       before(:each) do
         steps.each do |step|
-          allow(Step).to receive(:find).with(step.id).and_return(step)
+          allow(Step).to receive(:find).with(step.id.to_s).and_return(step)
         end
 
         allow(unit).to receive(:steps).and_return(steps)
 
         step_ids = steps.map(&:id)
-        allow(training).to receive(:step_ids).and_return(step_ids)
         training.box_0 = step_ids
+        training.current_step_id = step_ids.first
+        allow(training).to receive(:current_step).and_return(steps.first)
       end
     end
   end

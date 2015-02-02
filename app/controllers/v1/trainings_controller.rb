@@ -53,7 +53,6 @@ class V1::TrainingsController < V1::BaseController
       native_language_id: native_language.id
     })
 
-    @training.ensure_step_ids
     @training.current_step = step
     @training.save!
 

@@ -24,9 +24,8 @@ class Services::Training < Struct.new(:controller, :training)
 
   def next_step
     training.step_passed!
-    training.advance!
 
-    controller.render_step(training.fetch_step)
+    controller.render_step(training.fetch_step!)
   end
 
   def help_next_word

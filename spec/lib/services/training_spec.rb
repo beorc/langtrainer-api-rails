@@ -23,24 +23,6 @@ describe Services::Training do
       expect(training).to receive(:step_passed!)
       subject.next_step
     end
-
-    context 'given the first step as a current' do
-      it 'should render the next step' do
-        expect(controller).to receive(:render_step).with(steps.second)
-        subject.next_step
-      end
-    end
-
-    context 'given the last step as a current' do
-      before(:each) do
-        training.current_step = steps.count - 1
-      end
-
-      it 'should render the random step form boxes' do
-        expect(controller).to receive(:render_step)
-        subject.next_step
-      end
-    end
   end
 
   describe '#right_answer!' do
