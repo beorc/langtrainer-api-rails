@@ -2,7 +2,7 @@ class V1::BaseController < ApplicationController
   after_action :set_access_control_headers
 
   def handle_options_request
-    head(:ok) if request.request_method == 'OPTIONS'
+    head(:no_content) if request.request_method == 'OPTIONS'
   end
 
   private

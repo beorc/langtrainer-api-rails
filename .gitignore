@@ -14,6 +14,7 @@
 
 config/application.yml
 *.swp
+*.swo
 tags
 .approvals
 /spec/fixtures/approvals/**/*received.*
