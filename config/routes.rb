@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  match '*path', to: 'application#handle_options_request', via: :options, constraints: { method: 'OPTIONS' }
+
   api_version(:module => "V1", :path => {:value => "v1"}, :defaults => {:format => "json"}, :default => true) do
     get 'world' => 'worlds#world'
 
