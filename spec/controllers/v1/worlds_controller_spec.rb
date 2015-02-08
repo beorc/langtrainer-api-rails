@@ -31,7 +31,7 @@ describe V1::WorldsController do
     let(:params) { Hash.new }
 
     before(:each) do
-      expect(User).to receive(:fetch_or_create_by!).with(params[:token]).and_return(user)
+      expect(User).to receive(:fetch).with(params[:token]).and_return(user)
       expect(Course).to receive(:published).and_return(courses)
     end
 

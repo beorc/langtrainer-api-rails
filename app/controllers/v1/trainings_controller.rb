@@ -60,6 +60,6 @@ class V1::TrainingsController < V1::BaseController
   end
 
   def current_user
-    @user ||= User.find_by(token: params[:token])
+    @user ||= User.fetch_or_create_by!(params[:token])
   end
 end

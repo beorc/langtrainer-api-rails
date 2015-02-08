@@ -21,6 +21,6 @@ class V1::WorldsController < V1::BaseController
   end
 
   def current_user
-    @user ||= User.fetch_or_create_by!(params[:token])
+    @user ||= User.fetch(params[:token])
   end
 end
