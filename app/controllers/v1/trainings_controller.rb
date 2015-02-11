@@ -54,6 +54,7 @@ class V1::TrainingsController < V1::BaseController
     })
 
     @training.current_step = step
+    @training.difficulty_index = params[:difficulty_index].to_f
     @training.save!
 
     @training

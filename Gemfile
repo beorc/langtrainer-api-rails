@@ -9,7 +9,7 @@ gem 'rails-api'
 
 gem 'pg'
 gem 'versionist'
-gem 'langtrainer_orm_activerecord', github: 'beorc/langtrainer_orm_activerecord', branch: 'master'
+gem 'langtrainer_orm_activerecord', github: 'langtrainer/langtrainer_orm_activerecord', branch: 'master'
 gem 'rollbar', '~> 1.3.1'
 gem 'jbuilder'
 
