@@ -5,7 +5,7 @@ class V1::WorldsController < V1::BaseController
       json.languages Language.published, :slug
       json.courses Course.published do |course|
         json.slug course.slug
-        json.units course.units do |unit|
+        json.units course.units.published do |unit|
           json.id unit.id
           json.course_slug course.slug
           json.slug unit.slug
