@@ -1,11 +1,5 @@
 class Services::Training < Struct.new(:controller, :training)
-  DIFFICULTY_INDEX_THRESHOLD = 0.1
-
   def right_answer!
-    if training.difficulty_index < DIFFICULTY_INDEX_THRESHOLD
-      training.push_current_step_to_next_box!
-    end
-
     training.step_revised!
     training.right_answer!
 
@@ -13,7 +7,6 @@ class Services::Training < Struct.new(:controller, :training)
   end
 
   def wrong_answer!
-    training.push_current_step_to_first_box!
     training.wrong_answer!
 
     controller.render_false

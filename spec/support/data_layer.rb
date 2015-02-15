@@ -19,7 +19,9 @@ module DataLayer
         allow(unit).to receive(:steps).and_return(steps)
 
         step_ids = steps.map(&:id)
-        training.box_0 = step_ids
+        step_ids.each do |step_id|
+          training.schedule[step_id] = { box: 0 }
+        end
         training.current_step_id = step_ids.first
         allow(training).to receive(:current_step).and_return(steps.first)
       end
