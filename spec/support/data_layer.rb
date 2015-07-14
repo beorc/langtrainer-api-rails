@@ -13,7 +13,7 @@ module DataLayer
 
       before(:each) do
         steps.each do |step|
-          allow(Step).to receive(:find).with(step.id.to_s).and_return(step)
+          allow(Step).to receive(:find).with(step.id).and_return(step)
         end
 
         allow(unit).to receive(:steps).and_return(steps)

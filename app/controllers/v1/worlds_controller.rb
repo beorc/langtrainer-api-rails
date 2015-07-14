@@ -17,7 +17,7 @@ class V1::WorldsController < V1::BaseController
       end
     end
 
-    render json: world.target!
+    respond_with world.target!
   end
 
   def current_user

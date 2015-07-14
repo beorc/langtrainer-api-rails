@@ -7,7 +7,8 @@ describe V1::WorldsController do
     let(:courses) do
       [].tap do |courses|
         3.times do |i|
-          units = [].tap do |units|
+          units = double
+          units_array = [].tap do |units|
             3.times do |j|
               steps = [].tap do |steps|
                 3.times do |k|
@@ -22,6 +23,7 @@ describe V1::WorldsController do
           end
 
           c = Factory.build(:course_stub, id: i)
+          allow(units).to receive(:published).and_return(units_array)
           allow(c).to receive(:units).and_return(units)
           courses << c
         end
@@ -36,7 +38,7 @@ describe V1::WorldsController do
     end
 
     it 'should render the token, published languages and published courses' do
-      get :world
+      get :world, format: :json
       verify(format: :json) { response.body }
     end
   end

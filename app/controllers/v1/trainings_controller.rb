@@ -1,40 +1,33 @@
 class V1::TrainingsController < V1::BaseController
   before_action :fetch_training
+  around_action :wrap_in_transaction
 
   def verify_answer
-    ActiveRecord::Base.transaction do
-      Services::Training.new(self, @training).verify(params[:answer])
-    end
+    Services::Training.new(self, @training).verify(params[:answer])
   end
 
   def next_step
-    ActiveRecord::Base.transaction do
-      Services::Training.new(self, @training).next_step
-    end
+    Services::Training.new(self, @training).next_step
   end
 
   def help_next_word
-    ActiveRecord::Base.transaction do
-      Services::Training.new(self, @training).help_next_word
-    end
+    Services::Training.new(self, @training).help_next_word
   end
 
   def show_right_answer
-    ActiveRecord::Base.transaction do
-      Services::Training.new(self, @training).show_right_answer
-    end
+    Services::Training.new(self, @training).show_right_answer
   end
 
   def render_step(step)
-    render json: step
+    respond_with step
   end
 
   def render_nothing
-    render json: nil
+    respond_with nil
   end
 
   def render_false
-    render json: false
+    respond_with false
   end
 
   private
@@ -62,5 +55,9 @@ class V1::TrainingsController < V1::BaseController
 
   def current_user
     @user ||= User.fetch_or_create_by!(params[:token])
+  end
+
+  def wrap_in_transaction
+    ActiveRecord::Base.transaction { yield }
   end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 shared_examples 'a training' do
   it 'should return status 200' do
-    expect(response).to have_http_status(:success)
+    expect(response).to have_http_status(:ok)
   end
 
   it 'should assign @training' do
@@ -20,13 +20,14 @@ describe V1::TrainingsController do
       unit: unit.id,
       step: steps.first.id,
       language: Language.english.slug,
-      native_language: Language.russian.slug
+      native_language: Language.russian.slug,
+      format: :json
     }
   end
 
   before(:each) do
     expect(User).to receive(:fetch_or_create_by!).with(user.token).and_return(user)
-    expect(Unit).to receive(:find).with(unit.id.to_s).and_return(unit)
+    expect(Unit).to receive(:find).with(unit.id).and_return(unit)
     expect(Training).to receive(:find_or_create_by).with(
       user_id: user.id,
       unit_id: unit.id,

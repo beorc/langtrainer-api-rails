@@ -1,4 +1,4 @@
-ruby '2.2.1'
+ruby '2.2.2'
 source 'https://rubygems.org'
 
 
@@ -12,6 +12,7 @@ gem 'versionist'
 gem 'langtrainer_orm_activerecord', github: 'langtrainer/langtrainer_orm_activerecord', branch: 'master'
 gem 'rollbar', '~> 1.3.1'
 gem 'jbuilder'
+gem 'responders'
 
 group :production do
   gem 'puma'
