@@ -3,9 +3,9 @@ class V1::WorldsController < V1::BaseController
     world = Jbuilder.new do |json|
       json.token current_user.token
       json.languages Language.published, :slug
-      json.courses Course.published do |course|
+      json.courses Course.includes(:units).published do |course|
         json.slug course.slug
-        json.units course.units.published do |unit|
+        json.units course.units.includes(:steps).published do |unit|
           json.id unit.id
           json.course_slug course.slug
           json.slug unit.slug
